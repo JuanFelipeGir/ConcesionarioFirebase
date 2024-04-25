@@ -6,8 +6,8 @@ const QuotationR = (navigation) => {
   const [Name, setName]=useState('');
   const [Phone, setPhone]=useState('');
   const [Email, setEmail]=useState('');
-  const [TypeVehicle, setTypeVehicle]=useState(int);
-  const [Message, setMessage]=useState(int);
+  const [TypeVehicle, setTypeVehicle]=useState('');
+  const [Message, setMessage]=useState('');
 
   const handleSubmit=()=>{
     console.log('Name',Name);
