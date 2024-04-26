@@ -20,7 +20,7 @@ const HomeScreen = ({navigation}) => {
       <Text style={styleHome.text}>Asequibilidad al alcance de su mano</Text>
       <Text style={styleHome.text}>Los mejores autos de la ciudad</Text>
       <View style={styleHome.logoContainer}>
-        <Image source={require('../../../assets/logo1.png')} style={styleHome.logo}/>
+        <Image source={require('../../../assets/logo.png')} style={styleHome.logo}/>
       </View>
       <TouchableOpacity style={styleHome.button} onPress={() => navigation.navigate('Home')}>
         <Text style={styleHome.buttonText}> BIENVENIDO </Text>
@@ -43,9 +43,10 @@ const styleHome = StyleSheet.create({
     marginBottom: 20,
   },
   logo: {
-    width: 500,
-    height: 270,
-    marginBottom:100
+    width: 265,
+    height: 200,
+    marginBottom:50,
+    marginTop: 30
   },
   button: {
     backgroundColor: '#FF4928',
