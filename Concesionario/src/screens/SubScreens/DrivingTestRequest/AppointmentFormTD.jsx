@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { View } from 'react-native'
 import { Button, PaperProvider, Text, TextInput } from 'react-native-paper'
 import { useNavigation } from '@react-navigation/native'
-import { Database } from 'firebase/database'
+import database from '@react-native-firebase/database'
 
 const AppointmentFormTD = () => {
   const [Car, setCar]=useState('');
@@ -14,19 +14,19 @@ const AppointmentFormTD = () => {
   const navigation=useNavigation();
 
   const handleSubmit=()=>{
-    const appoinmentData ={
-      Car,Date,Name,Surname,DNI,Cellphone
+    const appoinmentData = {
+      Car, Date, Name, Surname, DNI, Cellphone
     }
     database()
-    .ref('/appoinment')
-    .push(appoinmentData)
-    .then(()=>{
-      console.log('appoinment Data uploaded succesful')
-      navigation.navigate('Confirm', appoinmentData)
-    })
-    .catch((error)=>{
-      console.error('Information not submited',error)
-    })
+      .ref('/appoinment')
+      .push(appoinmentData)
+      .then(() => {
+        console.log('appoinment Data uploaded succesful')
+        navigation.navigate('Confirm', appoinmentData)
+      })
+      .catch((error) => {
+        console.error('Information not submited', error)
+      })
   }
 
   return (

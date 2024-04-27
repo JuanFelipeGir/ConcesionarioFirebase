@@ -17,31 +17,36 @@ import Home from './src/screens/Home/Home'
 import { PaperProvider } from 'react-native-paper'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
+import FirebaseStage from './context/firebase/firebaseState';
 
-const Stack= createStackNavigator();
+const Stack = createStackNavigator();
 const App = () => {
   return (
-    <PaperProvider>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="HomeScreen" component={HomeScreen}/>
-          <Stack.Screen name="DrivingTestRequest" component={DrivingTestRequest}/>
-          <Stack.Screen name="AppointmentFormTD" component={AppointmentFormTD}/>
-          <Stack.Screen name="Confirm" component={Confirm}/>
-          <Stack.Screen name="Contact" component={Contact}/>
-          <Stack.Screen name="DealsAndOffers" component={DealsAndOffers}/>
-          <Stack.Screen name="ServiceHistory" component={ServiceHistory}/>
-          <Stack.Screen name="VehiclesCatalog" component={VehiclesCatalog}/>
-          <Stack.Screen name="Catalog"component={Catalog}/>
-          <Stack.Screen name="Vehicle" component={Vehicle}/>
-          <Stack.Screen name="VehicleList"component={VehicleList}/>
-          <Stack.Screen name="VehiclesSearch" component={VehiclesSearch}/>
-          <Stack.Screen name="WorkShopService" component={WorkShopService}/>
-          <Stack.Screen name="Home" component={Home}/>
+    <>
+      <FirebaseStage>
+        <PaperProvider>
+          <NavigationContainer>
+            <Stack.Navigator>
+              <Stack.Screen name="HomeScreen" component={HomeScreen} />
+              <Stack.Screen name="DrivingTestRequest" component={DrivingTestRequest} />
+              <Stack.Screen name="AppointmentFormTD" component={AppointmentFormTD} />
+              <Stack.Screen name="Confirm" component={Confirm} />
+              <Stack.Screen name="Contact" component={Contact} />
+              <Stack.Screen name="DealsAndOffers" component={DealsAndOffers} />
+              <Stack.Screen name="ServiceHistory" component={ServiceHistory} />
+              <Stack.Screen name="VehiclesCatalog" component={VehiclesCatalog} />
+              <Stack.Screen name="Catalog" component={Catalog} />
+              <Stack.Screen name="Vehicle" component={Vehicle} />
+              <Stack.Screen name="VehicleList" component={VehicleList} />
+              <Stack.Screen name="VehiclesSearch" component={VehiclesSearch} />
+              <Stack.Screen name="WorkShopService" component={WorkShopService} />
+              <Stack.Screen name="Home" component={Home} />
+              </Stack.Navigator>
+          </NavigationContainer>
+        </PaperProvider>
+      </FirebaseStage>
+    </>
 
-        </Stack.Navigator>
-      </NavigationContainer>
-    </PaperProvider>
   )
 }
 

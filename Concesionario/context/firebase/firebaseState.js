@@ -3,7 +3,13 @@ import FirebaseReducer from './firebaseReducer'
 import FirebaseContext from './firebaseContext'
 import firebase from '../../firebase'
 
+
 const FirebaseStage = (props) => {
+
+    useEffect(() => {
+        firebase.initializeApp();
+      }, []);
+    
     const initialState = {
         appointment: [],
     };
@@ -16,10 +22,19 @@ const FirebaseStage = (props) => {
             const appointmentData = snapshot.docs.map((doc) => doc.data())
             console.log('appointment retrieved:', appointmentData);
             dispatch({ type: 'SET_APPOINTMENTS', payload: appointmentData })
+        
+        const quotatingRef = firebase.database.collection('quotating')
+        const quotatingUnsub =quotatingRef.onSnapshot((snapshot) =>{
+            const quotatingData = snapshot.docs.map((doc) => doc.data())
+            console.log('quotating retrieved', quotatingData);
+            dispatch({type:'SET_QUOTATING', payload: quotatingData})
+        })
+        
         });
 
         return () => {
             appointmentsUnsub()
+            quotatingUnsub()
         };
     }, []);
 
