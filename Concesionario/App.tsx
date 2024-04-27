@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import React from 'react'
 import Contact from './src/screens/Contact'
 import AppointmentFormTD from './src/screens/SubScreens/DrivingTestRequest/AppointmentFormTD'
