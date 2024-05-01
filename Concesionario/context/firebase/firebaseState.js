@@ -6,10 +6,10 @@ import firebase from '../../firebase'
 
 const FirebaseStage = (props) => {
 
-    useEffect(() => {
+    /*useEffect(() => {
         firebase.initializeApp();
       }, []);
-    
+    */
     const initialState = {
         appointment: [],
     };

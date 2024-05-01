@@ -17,15 +17,15 @@ const AppointmentFormTD = () => {
     const appoinmentData = {
       Car, Date, Name, Surname, DNI, Cellphone
     }
-    database()
-      .ref('/appoinment')
-      .push(appoinmentData)
-      .then(() => {
-        console.log('appoinment Data uploaded succesful')
-        navigation.navigate('Confirm', appoinmentData)
-      })
-      .catch((error) => {
-        console.error('Information not submited', error)
+      database()
+        .ref('/appoinment')
+        .push(appoinmentData)
+        .then(() => {
+          console.log('appoinment Data uploaded succesful')
+          navigation.navigate('Confirm', appoinmentData)
+        })
+        .catch((error) => {
+          console.error('Information not submited', error)
       })
   }
 
