@@ -5,6 +5,9 @@ const firebaseConfig = {
   projectId: "concesionario-souka",
   storageBucket: "concesionario-souka.appspot.com",
   messagingSenderId: "87738000963",
-  appId: "1:87738000963:web:09a837c9745e2063ab96f6",
-  measurementId: "G-SZL5EGE6EJ"
+  appId: "1:87738000963:web:3e3e1093038b8311ab96f6",
+  measurementId: "G-QMHNJ8Y531"
 };
+
+
+export default firebaseConfig
