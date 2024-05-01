@@ -1,70 +1,85 @@
-import React, { useState } from 'react'
-import { View } from 'react-native'
-import { Button, PaperProvider, Text, TextInput } from 'react-native-paper'
-import { useNavigation } from '@react-navigation/native'
-import { Database } from 'firebase/database'
+import React, { useState, useEffect } from 'react';
+import { Alert, View } from 'react-native';
+import { Button, PaperProvider, Text, TextInput } from 'react-native-paper';
+import firebase from '../../../../database/firebase'
+
 
 const AppointmentFormTD = () => {
-  const [Car, setCar]=useState('');
-  const [Date, setDate]=useState('');
-  const [Name, setName]=useState('');
-  const [Surname, setSurname]=useState('');
-  const [DNI, setDNI]=useState('');
-  const [Cellphone, setCellphone]=useState('');
-  const navigation=useNavigation();
+  const [state, setState] = useState({
+    car: '',
+    date: '',
+    name: '',
+    surname: '',
+    dni: '',
+    cellphone: '',
+  });
 
-  const handleSubmit=()=>{
-    const appoinmentData ={
-      Car,Date,Name,Surname,DNI,Cellphone
-    }
-    database()
-    .ref('/appoinment')
-    .push(appoinmentData)
-    .then(()=>{
-      console.log('appoinment Data uploaded succesful')
-      navigation.navigate('Confirm', appoinmentData)
-    })
-    .catch((error)=>{
-      console.error('Information not submited',error)
-    })
+  const handleChangeText = (name, value) => {
+    setState({
+     ...state,
+      [name]: value,
+    });
   }
+
+  const AddAppointment = () => {
+    if(state.name === '') {
+      Alert('Please provide an information')
+    } else {
+      firebase.db.collection('appointments').add({
+        car: state.car,
+        date: state.date,
+        name: state.name,
+        surname: state.surname,
+        dni: state.dni,
+        cellphone: state.cellphone,
+      })
+      Alert.alert('Added Appointment')
+      
+      //console.log(state)
+    }
+  }
+
 
   return (
     <PaperProvider>
-        <View>
-            <Text>Car</Text>
-            <TextInput 
-            value={Car}
-            onChangeText={setCar}/>
-            <Text>Date</Text>
-            <TextInput 
-            value={Date}
-            onChangeText={setDate}/>
-            <Text>Name</Text>
-            <TextInput 
-            value={Name}
-            onChangeText={setName}/>
-            <Text>Surname</Text>
-            <TextInput 
-            value={Surname}
-            onChangeText={setSurname}/>
-            <Text>DNI</Text>
-            <TextInput 
-            value={DNI}
-            onChangeText={setDNI}/>
-            <Text>Cellphone</Text>
-            <TextInput 
-            value={Cellphone}
-            onChangeText={setCellphone}/>
+      <View>
+        <Text>Car</Text>
+        <TextInput 
+          placeholder='Car' 
+          onChangeText={(value) => handleChangeText('car', value)} 
+        />
+        <Text>Date</Text>
+        <TextInput 
+          placeholder='Date' 
+          onChangeText={(value) => handleChangeText('date', value)} 
+        />
+        <Text>Name</Text>
+        <TextInput
+         placeholder='Name' 
+         onChangeText={(value) => handleChangeText('name', value)} 
+        />
+        <Text>Surname</Text>
+        <TextInput 
+         placeholder='Surname' 
+         onChangeText={(value) => handleChangeText('surname', value)} 
+        />
+        <Text>DNI</Text>
+        <TextInput 
+         placeholder='DNI' 
+         onChangeText={(value) => handleChangeText('dni', value)}  
+        />
+        <Text>Cellphone</Text>
+        <TextInput
+         placeholder='Cellphone' 
+         onChangeText={(value) => handleChangeText('cellphone', value)} 
+        />
 
-            <Button
-              mode='contained'
-              title='Submit' onPress={handleSubmit}>
-                Send
-            </Button>
-        </View>
+        <Button mode='contained' title='Submit' onPress={() => AddAppointment()}>
+          Send
+        </Button>
+      </View>
     </PaperProvider>
-  )
-}
+  );
+};
 
-export default AppointmentFormTD
+export default AppointmentFormTD;
