@@ -13,9 +13,14 @@ const AppointmentFormTD = () => {
   const [Cellphone, setCellphone]=useState('');
   const navigation=useNavigation();
 
-  const handleSubmit=()=>{
+  const handleSubmit=(AppointmentFormTD)=>{
     const appoinmentData = {
-      Car, Date, Name, Surname, DNI, Cellphone
+      Car:AppointmentFormTD.Car, 
+      Date: AppointmentFormTD.Date, 
+      Name: AppointmentFormTD.Name, 
+      Surname: AppointmentFormTD.Surname, 
+      DNI:AppointmentFormTD.DNI, 
+      Cellphone:AppointmentFormTD.Cellphone
     }
       database()
         .ref('/appoinment')
