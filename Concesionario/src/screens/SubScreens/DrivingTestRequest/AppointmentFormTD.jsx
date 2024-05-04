@@ -1,75 +1,66 @@
-import React, { useContext, useState } from 'react'
-import { View } from 'react-native'
-import { Button, PaperProvider, Text, TextInput } from 'react-native-paper'
-import { useNavigation } from '@react-navigation/native'
-import database from '@react-native-firebase/database'
+import React, { useState } from 'react';
+import { View } from 'react-native';
+import { Button, Text, TextInput } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
+import database from '@react-native-firebase/database';
 
 const AppointmentFormTD = () => {
-  const [Car, setCar]=useState('');
-  const [Date, setDate]=useState('');
-  const [Name, setName]=useState('');
-  const [Surname, setSurname]=useState('');
-  const [DNI, setDNI]=useState('');
-  const [Cellphone, setCellphone]=useState('');
-  const navigation=useNavigation();
+  const [car, setCar] = useState('');
+  const [date, setDate] = useState('');
+  const [name, setName] = useState('');
+  const [surname, setSurname] = useState('');
+  const [dni, setDNI] = useState('');
+  const [cellphone, setCellphone] = useState('');
+  const navigation = useNavigation();
 
-  const handleSubmit=(AppointmentFormTD)=>{
-    const appoinmentData = {
-      Car:AppointmentFormTD.Car, 
-      Date: AppointmentFormTD.Date, 
-      Name: AppointmentFormTD.Name, 
-      Surname: AppointmentFormTD.Surname, 
-      DNI:AppointmentFormTD.DNI, 
-      Cellphone:AppointmentFormTD.Cellphone
-    }
-      database()
-        .ref('/appoinment')
-        .push(appoinmentData)
+  const handleSubmit = () => {
+    console.log("1");
+    const appointmentData = {
+      car,
+      date,
+      name,
+      surname,
+      dni,
+      cellphone
+    };
+    console.log("2");
+    try {
+      const databaseRef = database().ref('/appointment');
+      console.log("3");
+      databaseRef.push(appointmentData)
         .then(() => {
-          console.log('appoinment Data uploaded succesful')
-          navigation.navigate('Confirm', appoinmentData)
+          console.log('Appointment data uploaded successfully');
+          navigation.navigate('Confirm', appointmentData);
         })
-        .catch((error) => {
-          console.error('Information not submited', error)
-      })
-  }
+        .catch(error => {
+          console.error('Error submitting appointment data:', error);
+        });
+    } catch (error) {
+      console.error('Error accessing database:', error);
+    }
+  };
+  
 
   return (
-    <PaperProvider>
-        <View>
-            <Text>Car</Text>
-            <TextInput 
-            value={Car}
-            onChangeText={setCar}/>
-            <Text>Date</Text>
-            <TextInput 
-            value={Date}
-            onChangeText={setDate}/>
-            <Text>Name</Text>
-            <TextInput 
-            value={Name}
-            onChangeText={setName}/>
-            <Text>Surname</Text>
-            <TextInput 
-            value={Surname}
-            onChangeText={setSurname}/>
-            <Text>DNI</Text>
-            <TextInput 
-            value={DNI}
-            onChangeText={setDNI}/>
-            <Text>Cellphone</Text>
-            <TextInput 
-            value={Cellphone}
-            onChangeText={setCellphone}/>
+    <View>
+      <Text>Car</Text>
+      <TextInput value={car} onChangeText={setCar} />
+      <Text>Date</Text>
+      <TextInput value={date} onChangeText={setDate} />
+      <Text>Name</Text>
+      <TextInput value={name} onChangeText={setName} />
+      <Text>Surname</Text>
+      <TextInput value={surname} onChangeText={setSurname} />
+      <Text>DNI</Text>
+      <TextInput value={dni} onChangeText={setDNI} />
+      <Text>Cellphone</Text>
+      <TextInput value={cellphone} onChangeText={setCellphone} />
 
-            <Button
-              mode='contained'
-              title='Submit' onPress={handleSubmit}>
-                Send
-            </Button>
-        </View>
-    </PaperProvider>
-  )
-}
+      <Button mode='contained' onPress={handleSubmit}>
+        Send
+      </Button>
+    </View>
+  );
+};
 
-export default AppointmentFormTD
+export default AppointmentFormTD;

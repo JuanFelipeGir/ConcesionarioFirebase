@@ -33,8 +33,8 @@ const FirebaseStage = (props) => {
         });
 
         return () => {
-            appointmentsUnsub()
-            quotatingUnsub()
+            appointmentsUnsub();
+            quotatingUnsub();
         };
     }, []);
 
